@@ -1,6 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Whitespace {
 
@@ -10,8 +16,26 @@ public class Whitespace {
         // for each file "testdata{1,2,3}.txt
         // read in all the text and
         // send it to countBoth
+        StringBuilder textStr = new StringBuilder();
+        try{
+            File file = new File("testdata1.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()){
+                String text = scanner.nextLine();
+               textStr.append(text).append("\n");
+            }
 
-        wspc.countBoth("a b c d e"); // should print 4, 5
+            System.out.println(file);
+        } catch (FileNotFoundException e){
+            System.out.println("An error occurred");
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+
+
+
+        wspc.countBoth(textStr.toString()); // should print 4, 5
+        //wspc.countBoth("a b c d e"); // should print 4, 5
 
     }
 
@@ -20,6 +44,22 @@ public class Whitespace {
         // count the number of whitepace chars and non-whitspace chars.
         // need to use a FOR loop.
         // print the results simply on a line #whitespaces, #ofnonwhitespacechars for each file.
+        ArrayList<String>  newArr = new ArrayList<>();
+        newArr.addAll(List.of(testdata.split("")));
+        int countWhiteSpaces = 0;
+        int countNonWhiteSpaces = 0;
+        for (String s : newArr){
+            if ((Objects.equals(s, " ") || (Objects.equals(s, "\\s+"))) ){
+                countWhiteSpaces++;
+
+            } else {
+                countNonWhiteSpaces++;
+            }
+
+        }
+
+        System.out.println(countWhiteSpaces);
+        System.out.println(countNonWhiteSpaces);
 
     }
 
