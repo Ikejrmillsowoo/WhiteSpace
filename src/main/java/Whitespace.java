@@ -17,15 +17,21 @@ public class Whitespace {
         // read in all the text and
         // send it to countBoth
         StringBuilder textStr = new StringBuilder();
+        String content = "";
         try{
-            File file = new File("testdata1.txt");
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()){
-                String text = scanner.nextLine();
-               textStr.append(text).append("\n");
-            }
+//            File file = new File("testdata3.txt");
+//            Scanner scanner = new Scanner(file);
 
-            System.out.println(file);
+             content = Files.readString(Path.of("testdata1.txt"));
+           // while (scanner.hasNextLine()) {
+//                String text = scanner.nextLine();
+//                textStr.append(text);
+//                if (scanner.hasNextLine()) {
+//                    textStr.append(" ");
+//                }
+            //}
+
+           // System.out.println(file);
         } catch (FileNotFoundException e){
             System.out.println("An error occurred");
             System.out.println("An error occurred");
@@ -34,7 +40,7 @@ public class Whitespace {
 
 
 
-        wspc.countBoth(textStr.toString()); // should print 4, 5
+        wspc.countBoth(content); // should print 4, 5
         //wspc.countBoth("a b c d e"); // should print 4, 5
 
     }
@@ -49,7 +55,7 @@ public class Whitespace {
         int countWhiteSpaces = 0;
         int countNonWhiteSpaces = 0;
         for (String s : newArr){
-            if ((Objects.equals(s, " ") || (Objects.equals(s, "\\s+"))) ){
+            if ((s.equals(" ") || (s.equals("\t") || (s.equals("\n") || (s.equals("\r"))))) ){
                 countWhiteSpaces++;
 
             } else {
